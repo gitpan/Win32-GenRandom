@@ -8,7 +8,7 @@ require Exporter;
 *import = \&Exporter::import;
 require DynaLoader;
 
-$Win32::GenRandom::VERSION = '0.01';
+$Win32::GenRandom::VERSION = '0.02';
 
 DynaLoader::bootstrap Win32::GenRandom $Win32::GenRandom::VERSION;
 
@@ -18,7 +18,7 @@ DynaLoader::bootstrap Win32::GenRandom $Win32::GenRandom::VERSION;
     );
 
 %Win32::GenRandom::EXPORT_TAGS = (all => [qw(
-    cgr rgr cgr_uv rgr_uv 
+    cgr rgr cgr_uv rgr_uv
     )]);
 
 sub cgr_uv {
@@ -46,7 +46,7 @@ __END__
 =head1 NAME
 
    Win32::GenRandom - XS wrappers of CryptGenRandom and RtlGenRandom.
-   
+
 =head1 FUNCTIONS
 
    @c = cgr($how_many, $size);

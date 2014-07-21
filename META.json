@@ -19,23 +19,13 @@
          "inc"
       ]
    },
-   "prereqs" : {
-      "build" : {
-         "requires" : {
-            "ExtUtils::MakeMaker" : "0"
-         }
-      },
-      "configure" : {
-         "requires" : {
-            "ExtUtils::MakeMaker" : "0"
-         }
-      },
-      "runtime" : {
-         "requires" : {
-            "Test::Warn" : "0.23"
-         }
+   "release_status" : "stable",
+   "resources" : {
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/sisyphus/win32-genrandom.git",
+         "web" : "https://github.com/sisyphus/win32-genrandom"
       }
    },
-   "release_status" : "stable",
-   "version" : "0.01"
+   "version" : "0.02"
 }

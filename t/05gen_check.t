@@ -17,7 +17,7 @@ if($@) {
 else {
 
   print "1..2\n";
-  my $count = 20;
+  my $count = 10;
   my ($major, $minor) = (Win32::GetOSVersion())[1, 2];
 
   my @cgr = cgr($count, 2500);
@@ -30,7 +30,7 @@ else {
     $ok =~ s/a// unless Math::GMPz::Rmonobit($z);
     $ok =~ s/b// unless Math::GMPz::Rlong_run($z);
     $ok =~ s/c// unless Math::GMPz::Rruns($z);
-    $ok =~ s/d// unless Math::GMPz::Rpoker($z);    
+    $ok =~ s/d// unless Math::GMPz::Rpoker($z);
   }
 
   if($ok eq 'abcd') {print "ok 1\n"}
@@ -51,7 +51,7 @@ else {
       $ok =~ s/a// unless Math::GMPz::Rmonobit($z);
       $ok =~ s/b// unless Math::GMPz::Rlong_run($z);
       $ok =~ s/c// unless Math::GMPz::Rruns($z);
-      $ok =~ s/d// unless Math::GMPz::Rpoker($z);    
+      $ok =~ s/d// unless Math::GMPz::Rpoker($z);
     }
 
     if($ok eq 'abcd') {print "ok 2\n"}

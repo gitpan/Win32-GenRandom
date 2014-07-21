@@ -59,8 +59,6 @@ else {
 
 @s = cgr_uv($how_many);
 
-print $s[0], "\n";
-
 if(@s == $how_many) {print "ok 6\n"}
 else {
   warn "\n\@s: ", scalar(@s), "\n";

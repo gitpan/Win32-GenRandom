@@ -40,7 +40,7 @@ void cgr(pTHX_ unsigned long how_many, unsigned long len) {
       print_error(aTHX); /* callback to $^E */
       croak("Call to CryptGenRandom() failed");
     }
-   
+
     ST(i) = sv_2mortal(newSVpv(buff, len));
   }
   Safefree(buff);
@@ -55,16 +55,16 @@ void rgr(pTHX_ unsigned long how_many, unsigned long len) {
   char * buff;
 
   Newx(buff, len, char);
-  if(buff == 0) croak ("Failed to allocate memory for 'buff'"); 
+  if(buff == 0) croak ("Failed to allocate memory for 'buff'");
 
   HMODULE hLib=LoadLibrary("ADVAPI32.DLL");
 
   if (hLib) {
-    BOOLEAN (APIENTRY *pfn)(void*, ULONG) = 
+    BOOLEAN (APIENTRY *pfn)(void*, ULONG) =
       (BOOLEAN (APIENTRY *)(void*,ULONG))GetProcAddress(hLib,"SystemFunction036");
 
     for(i = 0; i < how_many; i++) {
-      if(pfn(buff,len)) ST(i) = sv_2mortal(newSVpv(buff, len)); 
+      if(pfn(buff,len)) ST(i) = sv_2mortal(newSVpv(buff, len));
       else {
         FreeLibrary(hLib);
         print_error(aTHX); /* callback to $^E */
@@ -97,14 +97,14 @@ SV * _error_test(pTHX) {
   return newSVuv(42);
 }
 
-MODULE = Win32::GenRandom	PACKAGE = Win32::GenRandom	
+MODULE = Win32::GenRandom	PACKAGE = Win32::GenRandom
 
 PROTOTYPES: DISABLE
 
 
 void
 print_error ()
-		
+
 	PREINIT:
 	I32* temp;
 	PPCODE:
