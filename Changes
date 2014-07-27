@@ -1,3 +1,6 @@
+0.03
+ - Rewrite rgr() so that it's suitable for MS compilers (and other minor rewrites).
+
 0.02
  - Amend t/04print_error.t to cater for some languages in addition to English.
 

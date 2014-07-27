@@ -23,8 +23,14 @@ else {
 
   my ($major, $minor) = (Win32::GetOSVersion())[1, 2];
 
-  my @cgr = cgr($count, 2500);
-  my @rgr = rgr($count, 2500);
+  my @cgr;
+  my @rgr;
+
+  push @cgr, cgr(1, 2500) for 1 .. $count;
+  push @rgr, rgr(1, 2500) for 1 .. $count;
+
+  die "Wrong number of random strings in \@cgr" unless @cgr == $count;
+  die "Wrong number of random strings in \@rgr" unless @rgr == $count;
 
   my $ok = 'abcd';
 
