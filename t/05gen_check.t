@@ -1,6 +1,5 @@
 # Run some basic tests to check the randomness.
-# Success implies little, but failure establishes that the PRG
-# is unsuitable for cryptographic purposes.
+# These tests need Math-GMPz-0.39 or later.
 
 use strict;
 use warnings;
@@ -10,11 +9,18 @@ eval {require Math::GMPz;};
 
 if($@) {
   print "1..1\n";
-  warn "\nMath::GMPz could not be loaded - skipping all tests\n";
+  warn "\nSkip all - Math::GMPz not loaded (0.39 or later needed)\n";
   print "ok 1\n";
 
 }
 else {
+
+  if($Math::GMPz::VERSION < '0.39') {
+    print "1..1\n";
+    warn "\nSkip all - we have Math-GMPz-$Math::GMPz::VERSION, but we need 0.39 or later\n";
+    print "ok 1\n";
+    exit 0;
+  }
 
   print "1..2\n";
   my $count = 210;
@@ -30,10 +36,26 @@ else {
 
   for(@cgr) {
     Math::GMPz::Rmpz_set_str($z, unpack("b*", $_), 2);
-    $ok =~ s/a// unless Math::GMPz::Rmonobit($z);
-    $ok =~ s/b// unless Math::GMPz::Rlong_run($z);
-    $ok =~ s/c// unless Math::GMPz::Rruns($z);
-    $ok =~ s/d// unless Math::GMPz::Rpoker($z);
+    unless(Math::GMPz::Rmonobit($z)) {
+      $ok =~ s/a//;
+      warn Math::GMPz::Rmpz_get_str($z, 62), "\n";
+    }
+    unless(Math::GMPz::Rlong_run($z)) {
+      $ok =~ s/b//;
+      warn Math::GMPz::Rmpz_get_str($z, 62), "\n";
+    }
+    unless(Math::GMPz::Rruns($z)) {
+      $ok =~ s/c//;
+      warn Math::GMPz::Rmpz_get_str($z, 62), "\n";
+    }
+    unless(Math::GMPz::Rpoker($z)) {
+      $ok =~ s/d//;
+      warn Math::GMPz::Rmpz_get_str($z, 62), "\n";
+    }
+#    unless(Math::GMPz::autocorrelation_20000($z, 10 + int(rand(10000)))) {
+#      $ok =~ s/e//;
+#      warn Math::GMPz::Rmpz_get_str($z, 62), "\n";
+#    }
   }
 
   if($ok eq 'abcd') {print "ok 1\n"}
@@ -51,10 +73,26 @@ else {
 
     for(@rgr) {
       Math::GMPz::Rmpz_set_str($z, unpack("b*", $_), 2);
-      $ok =~ s/a// unless Math::GMPz::Rmonobit($z);
-      $ok =~ s/b// unless Math::GMPz::Rlong_run($z);
-      $ok =~ s/c// unless Math::GMPz::Rruns($z);
-      $ok =~ s/d// unless Math::GMPz::Rpoker($z);
+      unless(Math::GMPz::Rmonobit($z)) {
+        $ok =~ s/a//;
+        warn Math::GMPz::Rmpz_get_str($z, 62), "\n";
+      }
+      unless(Math::GMPz::Rlong_run($z)) {
+        $ok =~ s/b//;
+        warn Math::GMPz::Rmpz_get_str($z, 62), "\n";
+      }
+      unless(Math::GMPz::Rruns($z)) {
+        $ok =~ s/c//;
+        warn Math::GMPz::Rmpz_get_str($z, 62), "\n";
+      }
+      unless(Math::GMPz::Rpoker($z)) {
+        $ok =~ s/d//;
+        warn Math::GMPz::Rmpz_get_str($z, 62), "\n";
+      }
+#      unless(Math::GMPz::autocorrelation_20000($z, 10 + int(rand(10000)))) {
+#        $ok =~ s/e//;
+#        warn Math::GMPz::Rmpz_get_str($z, 62), "\n";
+#      }
     }
 
     if($ok eq 'abcd') {print "ok 2\n"}
